@@ -1,0 +1,26 @@
+{
+  "name": "enemy-territory-query",
+  "version": "0.0.1",
+  "description": "A module for querying Wolfenstein: Enemy Territory server information.",
+  "main": "enemy-territory-query.js",
+  "scripts": {
+    "test": "nodeunit test/run.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/haapanen/et-query.git"
+  },
+  "keywords": [
+    "\"Enemy",
+    "Territory\""
+  ],
+  "author": "Jussi Haapanen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/haapanen/et-query/issues"
+  },
+  "homepage": "https://github.com/haapanen/et-query",
+  "dependencies": {
+    "lodash": "^2.4.1"
+  }
+}
