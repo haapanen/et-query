@@ -18,4 +18,4 @@ etQuery.getStatus({
   // To convert it to text, just use the .toString() method.
   console.log(status.toString());
 });
-´´´
+```
