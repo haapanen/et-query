@@ -3,7 +3,7 @@ et-query
 A small library for querying Wolfenstein: Enemy Territory servers.
 
 ## Usage
-'''javascript
+```javascript
 var etQuery = require("enemy-territory-query");
 
 etQuery.getStatus({
@@ -18,4 +18,4 @@ etQuery.getStatus({
   // To convert it to text, just use the .toString() method.
   console.log(status.toString());
 });
-'''
+´´´
