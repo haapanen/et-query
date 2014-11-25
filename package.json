@@ -1,6 +1,6 @@
 {
   "name": "enemy-territory-query",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A module for querying Wolfenstein: Enemy Territory server information.",
   "main": "enemy-territory-query.js",
   "scripts": {
