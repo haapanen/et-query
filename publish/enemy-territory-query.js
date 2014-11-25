@@ -86,7 +86,6 @@ function getInfo(server, callback) {
     var udpClient = udp.createSocket("udp4");
     udpClient.on("message", function (message, rinfo) {
       callback(message, rinfo);
-      udpClient.close();
     });
     var packet = _createPacket("getinfo");
     try {
@@ -98,13 +97,12 @@ function getInfo(server, callback) {
                 + server.address + ":" + server.port;
             }
             callback(null, null, err);
-            udpClient.close();
           }
         });
     } catch (err) {
       callback(null, null, err);
-      udpClient.close();
     }
+
   }
 }
 
