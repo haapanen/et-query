@@ -4,7 +4,7 @@
   "description": "A module for querying Wolfenstein: Enemy Territory server information.",
   "main": "enemy-territory-query.js",
   "scripts": {
-    "test": "nodeunit test/run.js"
+    "test": "mocha test"
   },
   "repository": {
     "type": "git",
@@ -22,5 +22,8 @@
   "homepage": "https://github.com/haapanen/et-query",
   "dependencies": {
     "lodash": "^2.4.1"
+  },
+  "devDependencies": {
+    "mocha": "^2.0.1"
   }
 }

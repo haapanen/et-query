@@ -1,74 +1,102 @@
-/**
- * Created by Jussi on 24.11.2014.
- */
-
 var etQuery = require("../enemy-territory-query");
-var validServer = {
-  address: "future.etjump.com",
-  port: 27960
-};
-var noAddress = {};
-var noPort = {};
-var invalidServerAddress = {
-  address: "future.etjump1.com",
-  port: 27960
-};
 
 var disconnectPacket = new Buffer("\xff\xff\xff\xffdisconnect", "binary");
 
-exports.tests = {
-  getStatusValidAddressAndPort: function (test) {
-    etQuery.getStatus(validServer, function (status, rinfo, err) {
-      test.ok(!err, "error: " + err);
-      test.ok(status.length > 0 && status !== disconnectPacket,
-        "invalid response packet.");
+describe("ETQuery", function () {
+  describe("getstatus", function () {
+    it("Should print the status of a server with correct addr/port",
+      function (done) {
+        etQuery.getStatus({
+          address: "future.etjump.com",
+          port: 27960
+        }, function (status, rinfo, err) {
+          if (err) {
+            throw err;
+          }
+
+          if (status.toString().length === 0) {
+            throw "nope";
+          }
+          done();
+        });
+      });
+
+    it("Should not succeed with an invalid address", function (done) {
+      etQuery.getStatus({
+        address: "abc",
+        port: 27960
+      }, function (status, rinfo, err) {
+        if (!err) {
+          throw "No error while supplying invalid address";
+        }
+        done();
+      });
     });
-    test.done();
-  },
 
-  getStatusInvalidAddress: function (test) {
-    etQuery.getStatus(invalidServerAddress, function (status, rinfo, err) {
-      test.ok(!err && err.length > 0, "no error");
+    it("Should not succeed with no address", function (done) {
+      etQuery.getStatus({port: 27960}, function (status, rinfo, err) {
+        if (!err) {
+          throw "No error";
+        }
+        done();
+      });
     });
 
-    test.done();
-  },
-
-  getStatusNoAddress: function (test) {
-    etQuery.getStatus(noAddress, function () {
-
+    it("Should not succeed with no port", function (done) {
+      etQuery.getStatus({address: "future.etjump.com"}, function (status, rinfo, err) {
+        if (!err) {
+          throw "No error";
+        }
+        done();
+      });
     });
-    test.done();
-  },
 
-  getStatusNoPort: function (test) {
-    etQuery.getStatus(noPort, function () {
+    it("Should print the info of a server with correct addr/port",
+      function (done) {
+        etQuery.getInfo({
+          address: "future.etjump.com",
+          port: 27960
+        }, function (status, rinfo, err) {
+          if (err) {
+            throw err;
+          }
 
+          if (status.toString().length === 0 ||
+              status.toString() === disconnectPacket) {
+            throw "No info";
+          }
+          done();
+        });
+      });
+
+    it("Should not succeed with an invalid address", function (done) {
+      etQuery.getInfo({
+        address: "abc",
+        port: 27960
+      }, function (status, rinfo, err) {
+        if (!err) {
+          throw "No error while supplying invalid address";
+        }
+        done();
+      });
     });
-    test.done();
-  },
 
-  getStatusInvalidPort: function (test) {
-    etQuery.getStatus({address: "future.etjump.com", port: "abc"},
-      function () {
-
+    it("Should not succeed with no address", function (done) {
+      etQuery.getInfo({port: 27960}, function (status, rinfo, err) {
+        if (!err) {
+          throw "No error";
+        }
+        done();
+      });
     });
-    test.done();
-  },
 
-  getInfoValidAddress: function (test) {
-    test.done();
-  },
-
-  getInfoInvalidAddress: function (test) {
-    test.done();
-  },
-
-  getInfoValidPort: function (test) {
-    test.done();
-  },
-
-  getInfoInvalidPort: function (test) {
-    test.done();
-  },
-};
+    it("Should not succeed with no port", function (done) {
+      etQuery.getInfo({address: "future.etjump.com"}, function (status, rinfo, err) {
+        if (!err) {
+          throw "No error";
+        }
+        done();
+      });
+    });
+  });
+});
